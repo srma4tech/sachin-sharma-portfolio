@@ -20,3 +20,7 @@ You can explore my professional work and experiments on
 
 ### Contact
 - GitHub: https://github.com/srma4tech
+
+### Projects
+View detailed case studies and work samples on the  
+👉 [Projects page]({{ site.baseurl }}/projects/)
