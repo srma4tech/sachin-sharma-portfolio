@@ -4,7 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Sachin Sharma | AEM Backend Developer | Adobe Experience Manager Expert</title>
+    <title>
+      Sachin Sharma | AEM Backend Developer | Adobe Experience Manager Expert
+    </title>
 
     <!-- SEO -->
     <meta
@@ -57,8 +59,21 @@
       href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👨‍💻</text></svg>"
     />
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    
     <!-- Styles -->
-    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="preload"
+      href="css/style.css"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link rel="stylesheet" href="css/style.css" />
+    </noscript>
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -156,8 +171,9 @@
         />
         <img
           src="https://media.licdn.com/dms/image/v2/D5603AQEJBodanOneXw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1709653328981?e=2147483647&v=beta&t=nSipQ-dGSpKfxM88FeX4lzx92O-ArshDjI4bJnyF9NM"
-          alt="Sachin Sharma Profile Picture"
+          alt="Sachin Sharma - AEM Backend Developer"
           class="profile-img"
+          loading="lazy"
         />
         <h1><i class="fas fa-briefcase"></i> Sachin Sharma</h1>
         <p>Associate Technology L2 | AEM Backend Developer</p>
