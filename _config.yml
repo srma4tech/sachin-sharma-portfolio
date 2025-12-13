@@ -3,22 +3,15 @@ description: Personal portfolio showcasing skills, experience, and projects.
 author: Sachin
 email: sachin.sharma.dev@outlook.com
 
-# GitHub Pages settings
 theme: minima
 
-# URL settings (update after enabling Pages)
-baseurl: "" 
-url: ""
+baseurl: "/sachin-sharma-portfolio"
+url: "https://srma4tech.github.io"
 
-# Build settings
 markdown: kramdown
+
 plugins:
   - jekyll-feed
 
-# Navigation (used by some themes)
-header_pages:
-  - index.md
-
-# Exclude unnecessary files from build
 exclude:
   - README.md
