@@ -1,12 +1,11 @@
-title: Sachin | Portfolio
-description: Personal portfolio showcasing skills, experience, and projects.
-author: Sachin
-email: sachin.sharma.dev@outlook.com
+title: Sachin Sharma | Portfolio
+description: Software Engineer and AEM Developer showcasing enterprise-grade projects, skills, and experience.
+author: Sachin Sharma
+
+url: "https://srma4tech.github.io"
+baseurl: "/sachin-sharma-portfolio"
 
 theme: minima
-
-baseurl: "/sachin-sharma-portfolio"
-url: "https://srma4tech.github.io"
 
 markdown: kramdown
 
