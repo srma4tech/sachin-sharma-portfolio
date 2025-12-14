@@ -55,6 +55,31 @@ header {
   font-weight: 600;
 }
 
+/* ==============================
+   Tablet Header Fix
+============================== */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .site-header {
+    height: 72px; /* allows 2 rows comfortably */
+  }
+
+  body {
+    padding-top: 72px; /* keep content aligned */
+  }
+
+  .site-header nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 0.5rem;
+  }
+
+  .site-header nav ul li a {
+    padding: 0.35rem 0.8rem;
+    font-size: 0.85rem;
+  }
+}
+
 .hero::before {
   content: "";
   position: absolute;
@@ -1006,5 +1031,12 @@ footer {
 @media (prefers-reduced-motion: reduce) {
   #cinematic-intro {
     display: none;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .site-header .resume-link a {
+    background: #2563eb;
+    font-weight: 600;
   }
 }
