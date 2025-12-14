@@ -129,41 +129,65 @@
   </head>
 
   <body>
+    <!-- Cinematic Intro -->
+    <div id="cinematic-intro" aria-hidden="true">
+      <div class="intro-content">
+        <span class="intro-line">Entering</span>
+        <h1 class="intro-name">Sachin Sharma’s</h1>
+        <span class="intro-line">World</span>
+      </div>
+    </div>
+
     <a href="#main" class="skip-link">Skip to main content</a>
-    <header>
-      <nav aria-label="Main navigation">
-        <ul>
-          <li>
-            <a href="#about"><i class="fas fa-user"></i> About</a>
-          </li>
-          <li>
-            <a href="#experience"
-              ><i class="fas fa-briefcase"></i> Experience</a
-            >
-          </li>
-          <li>
-            <a href="#skills"><i class="fas fa-tools"></i> Skills</a>
-          </li>
-          <li>
-            <a href="#projects"
-              ><i class="fas fa-project-diagram"></i> Projects</a
-            >
-          </li>
-          <li>
-            <a href="#education"
-              ><i class="fas fa-graduation-cap"></i> Education</a
-            >
-          </li>
-          <li>
-            <a href="#achievements"
-              ><i class="fas fa-trophy"></i> Achievements</a
-            >
-          </li>
-          <li>
-            <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
-          </li>
-        </ul>
-      </nav>
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="brand">Sachin Sharma</div>
+
+        <button class="nav-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <nav class="nav-menu">
+          <ul>
+            <li>
+              <a href="#about"><i class="fas fa-user"></i> About</a>
+            </li>
+            <li>
+              <a href="#experience"
+                ><i class="fas fa-briefcase"></i> Experience</a
+              >
+            </li>
+            <li>
+              <a href="#skills"><i class="fas fa-tools"></i> Skills</a>
+            </li>
+            <li>
+              <a href="#projects"
+                ><i class="fas fa-project-diagram"></i> Projects</a
+              >
+            </li>
+            <li>
+              <a href="#education"
+                ><i class="fas fa-graduation-cap"></i> Education</a
+              >
+            </li>
+            <li>
+              <a href="#achievements"
+                ><i class="fas fa-trophy"></i> Achievements</a
+              >
+            </li>
+            <li>
+              <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+            </li>
+            <li class="resume-link">
+              <a href="documents/Sachin_Sharma_Resume.pdf" download>
+                <i class="fas fa-download"></i> Resume
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
     <main id="main">
@@ -701,5 +725,7 @@
         "sameAs": ["https://in.linkedin.com/in/srma4tech"]
       }
     </script>
+    <script src="js/analytics-events.js" defer></script>
+    <script src="js/script.js" defer></script>
   </body>
 </html>
