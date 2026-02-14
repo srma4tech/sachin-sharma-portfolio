@@ -1,166 +1,119 @@
 document.addEventListener("DOMContentLoaded", () => {
-  /* ==================================================
-   Cinematic Intro – Run Once
-================================================== */
-
-  const intro = document.getElementById("cinematic-intro");
-
-  if (intro && !sessionStorage.getItem("introPlayed")) {
-    setTimeout(() => {
-      intro.classList.add("hidden");
-      sessionStorage.setItem("introPlayed", "true");
-
-      setTimeout(() => {
-        intro.remove();
-      }, 1000);
-    }, 2200);
-  } else if (intro) {
-    intro.remove();
-  }
-
-  /* ==================================================
-     HEADER NAVIGATION (CLEAN & SCOPED)
-  ================================================== */
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
 
   const header = document.querySelector(".site-header");
   const navMenu = document.querySelector(".site-header .nav-menu");
   const navToggle = document.querySelector(".site-header .nav-toggle");
-  const navLinks = document.querySelectorAll(".site-header .nav-menu a");
+  const navLinks = document.querySelectorAll('.site-header .nav-menu a[href^="#"]');
 
-  // Toggle mobile menu
+  function closeMenu() {
+    if (!navMenu || !navToggle) return;
+    navMenu.classList.remove("active");
+    navToggle.classList.remove("open");
+    navToggle.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+  }
+
   if (navToggle && navMenu) {
-    navToggle.addEventListener("click", (e) => {
-      e.stopPropagation();
-      navMenu.classList.toggle("active");
-      navToggle.classList.toggle("open");
+    navToggle.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const isOpen = navMenu.classList.toggle("active");
+      navToggle.classList.toggle("open", isOpen);
+      navToggle.setAttribute("aria-expanded", String(isOpen));
+      document.body.style.overflow = isOpen ? "hidden" : "";
+    });
 
-      // Lock body scroll on mobile
-      document.body.style.overflow = navMenu.classList.contains("active")
-        ? "hidden"
-        : "";
+    document.addEventListener("click", (event) => {
+      if (!navMenu.classList.contains("active")) return;
+      if (navMenu.contains(event.target) || navToggle.contains(event.target)) return;
+      closeMenu();
     });
   }
 
-  // Close menu on nav link click (mobile)
   navLinks.forEach((link) => {
     link.addEventListener("click", () => {
-      navMenu.classList.remove("active");
-      navToggle.classList.remove("open");
-      document.body.style.overflow = "";
+      closeMenu();
     });
   });
 
-  // Close menu on outside click
-  document.addEventListener("click", (e) => {
-    if (
-      navMenu.classList.contains("active") &&
-      !navMenu.contains(e.target) &&
-      !navToggle.contains(e.target)
-    ) {
-      navMenu.classList.remove("active");
-      navToggle.classList.remove("open");
-      document.body.style.overflow = "";
-    }
-  });
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", (event) => {
+      const href = anchor.getAttribute("href");
+      if (!href || href === "#") return;
 
-  /* ==================================================
-     SMOOTH SCROLL (HEADER AWARE)
-  ================================================== */
-
-  document.querySelectorAll('.site-header a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
-      const targetId = this.getAttribute("href");
-      const target = document.querySelector(targetId);
+      const target = document.querySelector(href);
       if (!target) return;
 
-      e.preventDefault();
+      event.preventDefault();
 
       const headerOffset = header ? header.offsetHeight : 56;
-      const elementPosition = target.getBoundingClientRect().top;
-      const offsetPosition =
-        elementPosition + window.pageYOffset - headerOffset;
+      const y = target.getBoundingClientRect().top + window.scrollY - headerOffset;
 
       window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
+        top: y,
+        behavior: prefersReducedMotion ? "auto" : "smooth",
       });
     });
   });
 
-  /* ==================================================
-     ACTIVE NAV LINK HIGHLIGHT
-  ================================================== */
+  const observedSections = document.querySelectorAll("main section[id]");
+  const trackedNavLinks = document.querySelectorAll('.site-header .nav-menu a[href^="#"]');
 
-  const sections = document.querySelectorAll("section");
-
-  if (sections.length && navLinks.length) {
-    const observer = new IntersectionObserver(
+  if (observedSections.length && trackedNavLinks.length && "IntersectionObserver" in window) {
+    const activeObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const id = entry.target.getAttribute("id");
-            navLinks.forEach((link) => {
-              link.classList.toggle(
-                "active",
-                link.getAttribute("href") === `#${id}`
-              );
-            });
-          }
+          if (!entry.isIntersecting) return;
+          const id = entry.target.getAttribute("id");
+          trackedNavLinks.forEach((link) => {
+            link.classList.toggle("active", link.getAttribute("href") === `#${id}`);
+          });
         });
       },
       {
-        rootMargin: "-60px 0px -60px 0px",
+        rootMargin: "-35% 0px -55% 0px",
         threshold: 0,
       }
     );
 
-    sections.forEach((section) => observer.observe(section));
+    observedSections.forEach((section) => activeObserver.observe(section));
   }
 
-  /* ==================================================
-     SECTION REVEAL ANIMATION
-  ================================================== */
+  if (!prefersReducedMotion && "IntersectionObserver" in window) {
+    const revealTargets = document.querySelectorAll("main section");
 
-  const sectionsAnim = document.querySelectorAll("section");
+    revealTargets.forEach((section) => {
+      section.style.opacity = "0";
+      section.style.transform = "translateY(14px)";
+      section.style.transition = "opacity 0.4s ease, transform 0.4s ease";
+    });
 
-  if (sectionsAnim.length) {
-    const animObserver = new IntersectionObserver(
-      (entries) => {
+    const revealObserver = new IntersectionObserver(
+      (entries, observer) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.style.opacity = "1";
-            entry.target.style.transform = "translateY(0)";
-          }
+          if (!entry.isIntersecting) return;
+          entry.target.style.opacity = "1";
+          entry.target.style.transform = "translateY(0)";
+          observer.unobserve(entry.target);
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.12 }
     );
 
-    sectionsAnim.forEach((section) => {
-      section.style.opacity = "0";
-      section.style.transform = "translateY(20px)";
-      section.style.transition = "opacity 0.5s ease, transform 0.5s ease";
-      animObserver.observe(section);
-    });
+    revealTargets.forEach((section) => revealObserver.observe(section));
   }
-
-  /* ==================================================
-     BACK TO TOP
-  ================================================== */
 
   const backToTop = document.querySelector(".back-to-top");
   if (backToTop) {
-    backToTop.addEventListener("click", (e) => {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: "smooth" });
+    backToTop.addEventListener("click", (event) => {
+      event.preventDefault();
+      window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
     });
   }
 
-  /* ==================================================
-     FORM VALIDATION (UNCHANGED LOGIC)
-  ================================================== */
-
-  const form = document.querySelector("form");
+  const form = document.getElementById("contact-form");
   const nameInput = document.getElementById("name");
   const emailInput = document.getElementById("email");
   const subjectInput = document.getElementById("subject");
@@ -171,100 +124,94 @@ document.addEventListener("DOMContentLoaded", () => {
   const subjectError = document.getElementById("subject-error");
   const messageError = document.getElementById("message-error");
 
+  function setValidation(input, errorNode, isValid, message) {
+    if (!input || !errorNode) return isValid;
+    input.classList.toggle("valid", isValid);
+    input.classList.toggle("invalid", !isValid);
+    errorNode.textContent = isValid ? "" : message;
+    return isValid;
+  }
+
   function validateName() {
-    if (!nameInput) return true;
-    const name = nameInput.value.trim();
-    if (name.length < 2) {
-      nameInput.classList.add("invalid");
-      nameInput.classList.remove("valid");
-      if (nameError)
-        nameError.textContent = "Name must be at least 2 characters.";
-      return false;
-    }
-    nameInput.classList.remove("invalid");
-    nameInput.classList.add("valid");
-    if (nameError) nameError.textContent = "";
-    return true;
+    const value = nameInput ? nameInput.value.trim() : "";
+    return setValidation(
+      nameInput,
+      nameError,
+      value.length >= 2,
+      "Name must be at least 2 characters."
+    );
   }
 
   function validateEmail() {
-    if (!emailInput) return true;
-    const email = emailInput.value.trim();
+    const value = emailInput ? emailInput.value.trim() : "";
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      emailInput.classList.add("invalid");
-      emailInput.classList.remove("valid");
-      if (emailError)
-        emailError.textContent = "Please enter a valid email address.";
-      return false;
-    }
-    emailInput.classList.remove("invalid");
-    emailInput.classList.add("valid");
-    if (emailError) emailError.textContent = "";
-    return true;
+    return setValidation(
+      emailInput,
+      emailError,
+      emailRegex.test(value),
+      "Please enter a valid email address."
+    );
   }
 
   function validateSubject() {
-    if (!subjectInput) return true;
-    const subject = subjectInput.value.trim();
-    if (subject.length < 5) {
-      subjectInput.classList.add("invalid");
-      subjectInput.classList.remove("valid");
-      if (subjectError)
-        subjectError.textContent = "Subject must be at least 5 characters.";
-      return false;
-    }
-    subjectInput.classList.remove("invalid");
-    subjectInput.classList.add("valid");
-    if (subjectError) subjectError.textContent = "";
-    return true;
+    const value = subjectInput ? subjectInput.value.trim() : "";
+    return setValidation(
+      subjectInput,
+      subjectError,
+      value.length >= 5,
+      "Subject must be at least 5 characters."
+    );
   }
 
   function validateMessage() {
-    if (!messageInput) return true;
-    const message = messageInput.value.trim();
-    if (message.length < 10) {
-      messageInput.classList.add("invalid");
-      messageInput.classList.remove("valid");
-      if (messageError)
-        messageError.textContent = "Message must be at least 10 characters.";
-      return false;
-    }
-    messageInput.classList.remove("invalid");
-    messageInput.classList.add("valid");
-    if (messageError) messageError.textContent = "";
-    return true;
+    const value = messageInput ? messageInput.value.trim() : "";
+    return setValidation(
+      messageInput,
+      messageError,
+      value.length >= 10,
+      "Message must be at least 10 characters."
+    );
   }
 
-  if (form) {
-    form.addEventListener("submit", (e) => {
-      const valid =
-        validateName() &&
-        validateEmail() &&
-        validateSubject() &&
-        validateMessage();
+  if (nameInput) nameInput.addEventListener("blur", validateName);
+  if (emailInput) emailInput.addEventListener("blur", validateEmail);
+  if (subjectInput) subjectInput.addEventListener("blur", validateSubject);
+  if (messageInput) messageInput.addEventListener("blur", validateMessage);
 
-      if (!valid) {
-        e.preventDefault();
-        alert("Please correct the errors in the form.");
+  if (form) {
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const isValid =
+        validateName() && validateEmail() && validateSubject() && validateMessage();
+
+      if (!isValid) {
+        alert("Please correct the highlighted fields before continuing.");
         return;
       }
 
-      alert(
-        "Thank you for your message! Your email client has been opened to send the message."
-      );
-      form.reset();
-    });
-  }
+      const name = encodeURIComponent(nameInput.value.trim());
+      const email = encodeURIComponent(emailInput.value.trim());
+      const subject = encodeURIComponent(subjectInput.value.trim());
+      const message = encodeURIComponent(messageInput.value.trim());
 
-  const resetBtn = document.querySelector('button[type="reset"]');
-  if (resetBtn) {
-    resetBtn.addEventListener("click", () => {
+      const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0A${message}`;
+      const mailto = `mailto:sachin.sharma.dev@outlook.com?subject=${subject}&body=${body}`;
+
+      if (typeof gtag === "function") {
+        gtag("event", "contact_form_submit", { method: "mailto_draft" });
+      }
+
+      window.location.href = mailto;
+    });
+
+    form.addEventListener("reset", () => {
       [nameInput, emailInput, subjectInput, messageInput].forEach((input) => {
         if (input) input.classList.remove("valid", "invalid");
       });
-      [nameError, emailError, subjectError, messageError].forEach((error) => {
-        if (error) error.textContent = "";
+
+      [nameError, emailError, subjectError, messageError].forEach((errorNode) => {
+        if (errorNode) errorNode.textContent = "";
       });
     });
   }
