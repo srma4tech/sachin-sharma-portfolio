@@ -14,7 +14,7 @@
       content="Sachin Sharma, AEM Developer, Adobe Experience Manager, AEMaaCS, Java, Sling Models, OSGi, Backend Developer"
     />
     <meta name="author" content="Sachin Sharma" />
-    <meta name="theme-color" content="#0d2238" />
+    <meta name="theme-color" content="#0a0e14" />
 
     <link
       rel="canonical"
@@ -54,6 +54,12 @@
 
     <link rel="preconnect" href="https://www.googletagmanager.com" />
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
     <link
       rel="preload"
@@ -148,26 +154,21 @@
               <a href="documents/Sachin-Sharma-Resume.pdf" download>Resume</a>
             </li>
           </ul>
+          <span class="nav-indicator" aria-hidden="true"></span>
         </nav>
       </div>
+      <span class="scroll-progress" aria-hidden="true"></span>
     </header>
 
     <main id="main">
       <section class="hero" aria-label="Introduction">
+        <canvas class="hero-circuit" aria-hidden="true"></canvas>
         <div class="hero-grid">
           <div class="hero-content">
-            <img
-              src="https://media.licdn.com/dms/image/v2/D5603AQEJBodanOneXw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1709653328981?e=2147483647&v=beta&t=nSipQ-dGSpKfxM88FeX4lzx92O-ArshDjI4bJnyF9NM"
-              alt="Sachin Sharma"
-              class="profile-img"
-              loading="eager"
-              decoding="async"
-            />
-
             <p class="eyebrow">Senior AEM Backend Engineer</p>
             <h1>
-              Building scalable AEM platforms that stay fast, stable, and
-              maintainable.
+              <span class="typewriter">Building scalable AEM platforms that stay fast, stable, and
+              maintainable.</span>
             </h1>
             <p class="hero-subtitle">
               8 years in enterprise delivery, including 6 years focused on AEM Sites, Forms, MSM,
@@ -192,19 +193,30 @@
             </div>
           </div>
 
-          <aside class="hero-panel" aria-label="Key highlights">
-            <h2>Quick Snapshot</h2>
-            <ul class="hero-stats">
-              <li><strong>8 yrs</strong><span>Total Experience</span></li>
-              <li><strong>6 yrs</strong><span>AEM Relevant Experience</span></li>
-              <li><strong>3 major orgs</strong><span>LTIMindtree, Publicis Sapient, TCS</span></li>
-            </ul>
-            <p class="hero-note">
-              Open to AEM backend roles, architecture-heavy projects, and
-              enterprise modernization work.
-            </p>
-          </aside>
+          <div class="avatar-stage" aria-label="Sachin Sharma profile photo">
+            <span class="avatar-ring ring-outer" aria-hidden="true"></span>
+            <span class="avatar-ring ring-inner" aria-hidden="true"></span>
+            <img
+              src="https://media.licdn.com/dms/image/v2/D5603AQEJBodanOneXw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1709653328981?e=2147483647&v=beta&t=nSipQ-dGSpKfxM88FeX4lzx92O-ArshDjI4bJnyF9NM"
+              alt="Sachin Sharma"
+              class="profile-img"
+              loading="eager"
+              decoding="async"
+            />
+          </div>
         </div>
+        <aside class="hero-panel" aria-label="Key highlights">
+          <h2>Quick Snapshot</h2>
+          <ul class="hero-stats">
+            <li><strong data-count-to="8" data-suffix=" yrs">8 yrs</strong><span>Total Experience</span></li>
+            <li><strong data-count-to="6" data-suffix=" yrs">6 yrs</strong><span>AEM Relevant Experience</span></li>
+            <li><strong data-count-to="3" data-suffix=" major orgs">3 major orgs</strong><span>LTIMindtree, Publicis Sapient, TCS</span></li>
+          </ul>
+          <p class="hero-note">
+            Open to AEM backend roles, architecture-heavy projects, and
+            enterprise modernization work.
+          </p>
+        </aside>
       </section>
 
       <section id="about">
@@ -221,19 +233,19 @@
           integrations using Java services, servlets, and workflow orchestration.
         </p>
         <div class="about-highlights">
-          <article class="highlight-item">
+          <article class="highlight-item tilt-card" tabindex="0">
             <h3>Architecture</h3>
             <p>Scalable content models, MSM strategy, reusable templates and fragments.</p>
           </article>
-          <article class="highlight-item">
+          <article class="highlight-item tilt-card" tabindex="0">
             <h3>Backend Engineering</h3>
             <p>Java, OSGi services, Sling models, servlets, schedulers, and workflows.</p>
           </article>
-          <article class="highlight-item">
+          <article class="highlight-item tilt-card" tabindex="0">
             <h3>Performance</h3>
             <p>Dispatcher configuration, caching strategy, and production troubleshooting.</p>
           </article>
-          <article class="highlight-item">
+          <article class="highlight-item tilt-card" tabindex="0">
             <h3>Cloud Integration</h3>
             <p>AWS-based integrations, API-driven use cases, and secure service patterns.</p>
           </article>
@@ -243,6 +255,20 @@
       <section id="experience">
         <h2>Experience</h2>
 
+        <div class="timeline">
+          <span class="timeline-progress" aria-hidden="true"></span>
+          <!-- TODO: fill in new LTM experience entry, then uncomment
+          <article class="job timeline-entry">
+            <h3>Role title TBD</h3>
+            <p class="meta">Date range TBD</p>
+            <ul>
+              <li>Impact placeholder TBD.</li>
+              <li>Delivery placeholder TBD.</li>
+              <li>Leadership placeholder TBD.</li>
+              <li>Technical scope placeholder TBD.</li>
+            </ul>
+          </article>
+          -->
         <article class="job">
           <h3>Specialist - Software Engineering (Senior AEM Backend Engineer)</h3>
           <p class="meta">LTIMindtree (LTM) | January 6, 2026 - Present</p>
@@ -276,6 +302,7 @@
             <li>Delivered in Agile Scrum teams with strong quality and release discipline.</li>
           </ul>
         </article>
+        </div>
       </section>
 
       <section id="skills">
@@ -299,7 +326,8 @@
       <section id="projects">
         <h2>Projects</h2>
 
-        <article class="project">
+        <div class="project-grid">
+        <article class="project tilt-card" tabindex="0">
           <h3><a href="https://www.publicissapient.com/" target="_blank" rel="noopener noreferrer">PS Marketing</a></h3>
           <p class="project-duration">April 2023 - January 2026</p>
           <p>
@@ -314,7 +342,7 @@
           </ul>
         </article>
 
-        <article class="project">
+        <article class="project tilt-card" tabindex="0">
           <h3><a href="https://www.axalta.com/" target="_blank" rel="noopener noreferrer">Axalta</a></h3>
           <p class="project-duration">June 2020 - March 2023</p>
           <p>
@@ -329,7 +357,7 @@
           </ul>
         </article>
 
-        <article class="project">
+        <article class="project tilt-card" tabindex="0">
           <h3><a href="https://www.gsk.com/" target="_blank" rel="noopener noreferrer">GSK</a></h3>
           <p class="project-duration">March 2018 - May 2020</p>
           <p>
@@ -342,11 +370,13 @@
             <li>Collaborated with support teams to maintain release quality.</li>
           </ul>
         </article>
+        </div>
       </section>
 
       <section id="education">
         <h2>Education</h2>
 
+        <div class="education-grid">
         <article class="edu">
           <h3>Master of Computer Application (MCA)</h3>
           <p><a href="https://www.sastra.edu/" target="_blank" rel="noopener noreferrer">SASTRA Deemed University, Thanjavur</a></p>
@@ -364,14 +394,16 @@
           <p><a href="https://navodaya.gov.in/" target="_blank" rel="noopener noreferrer">Jawahar Navodaya Vidyalaya, Baghpat</a></p>
           <p class="meta">July 2012 - May 2014 | 69.2%</p>
         </article>
+        </div>
       </section>
 
       <section id="achievements">
         <h2>Certifications</h2>
 
+        <div class="certification-grid">
         <article class="achievement">
           <h3>Adobe Certified Professional (ADO-E123)</h3>
-          <p class="meta">February 2024 - February 2026</p>
+          <p class="meta">February 2024 - February 2026</p><!-- TODO: update AEM cert validity to reflect renewal from 2026-04-20, end date TBC -->
         </article>
 
         <article class="achievement">
@@ -383,6 +415,7 @@
           <h3>Azure Fundamentals (AZ-900)</h3>
           <p class="meta">September 2021 - Present</p>
         </article>
+        </div>
       </section>
 
       <section id="contact">
