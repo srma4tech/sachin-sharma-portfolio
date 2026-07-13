@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# Artifacts
+report.json
+lighthouse-report/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Lighthouse CI
+.lighthouseci/

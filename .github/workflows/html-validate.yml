@@ -1,0 +1,29 @@
+name: HTML Validation
+
+on:
+  push:
+    branches: [main, feature/**]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Validate HTML
+        uses: Cyb3r-Jak3/html-validator@v7.2
+        with:
+          files: index.html
+          format: json
+          
+      - name: Check CSS validity
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Validate CSS
+        run: |
+          npm install -g stylelint stylelint-config-standard
+          stylelint 'css/**/*.css'

@@ -1,0 +1,60 @@
+name: Performance Budget Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  performance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Install dependencies
+        run: npm install --save-dev lighthouse
+      
+      - name: Run performance audit
+        run: |
+          npx lighthouse https://srma4tech.github.io/sachin-sharma-portfolio/ \
+            --chrome-flags="--headless" \
+            --output-path=./report.json \
+            --output=json
+      
+      - name: Check performance thresholds
+        run: |
+          node -e "
+          const report = require('./report.json');
+          const scores = report.categories;
+          const thresholds = {
+            performance: 80,
+            accessibility: 90,
+            'best-practices': 85,
+            seo: 90
+          };
+          
+          let failed = false;
+          Object.entries(thresholds).forEach(([key, threshold]) => {
+            const score = Math.round(scores[key].score * 100);
+            console.log(\`\${key}: \${score}/100 (threshold: \${threshold})\`);
+            if (score < threshold) {
+              console.error(\`❌ \${key} score below threshold!");
+              failed = true;
+            }
+          });
+          
+          process.exit(failed ? 1 : 0);
+          "
+      
+      - name: Upload lighthouse report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: lighthouse-report
+          path: report.json

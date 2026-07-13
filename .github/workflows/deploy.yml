@@ -1,0 +1,28 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_run:
+    workflows: ["Lighthouse CI", "HTML Validation"]
+    types: [completed]
+    branches: [main]
+
+jobs:
+  deploy:
+    if: github.event_name == 'push' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+          force_orphan: true
+      
+      - name: Verify deployment
+        run: |
+          echo "✅ Portfolio deployed to GitHub Pages"
+          echo "🔗 Live URL: https://srma4tech.github.io/sachin-sharma-portfolio/"

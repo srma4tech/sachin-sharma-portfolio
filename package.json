@@ -1,0 +1,23 @@
+{
+  "name": "sachin-sharma-portfolio",
+  "version": "2.0.0",
+  "description": "Personal portfolio with AEM interview preparation guide",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Tests run via GitHub Actions\"",
+    "lighthouse": "lighthouse https://srma4tech.github.io/sachin-sharma-portfolio/ --chrome-flags=\"--headless\" --output=html --output-path=./lighthouse-report.html"
+  },
+  "keywords": [
+    "portfolio",
+    "AEM",
+    "backend-engineer",
+    "interview-prep"
+  ],
+  "author": "Sachin Sharma",
+  "license": "MIT",
+  "devDependencies": {
+    "lighthouse": "^10.0.0",
+    "stylelint": "^15.0.0",
+    "stylelint-config-standard": "^34.0.0"
+  }
+}
