@@ -1,29 +1,40 @@
 document.addEventListener("DOMContentLoaded", () => {
   const reduceMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const prefersReducedMotion = reduceMotionQuery.matches;
-  const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
   const header = document.querySelector(".site-header");
   const navMenu = document.querySelector(".site-header .nav-menu");
   const navToggle = document.querySelector(".site-header .nav-toggle");
   const navLinks = document.querySelectorAll('.site-header .nav-menu a[href^="#"]');
   const navIndicator = document.querySelector(".nav-indicator");
+  const compactNavQuery = window.matchMedia("(max-width: 1024px)");
+
+  function onMediaChange(query, handler) {
+    if (query.addEventListener) query.addEventListener("change", handler);
+    else query.addListener(handler);
+  }
+
+  function setMenuState(isOpen) {
+    if (!navMenu || !navToggle) return;
+    const compact = compactNavQuery.matches;
+    const expanded = compact && isOpen;
+    navMenu.classList.toggle("active", expanded);
+    navToggle.classList.toggle("open", expanded);
+    navToggle.setAttribute("aria-expanded", String(expanded));
+    navMenu.setAttribute("aria-hidden", String(compact && !expanded));
+    navMenu.inert = compact && !expanded;
+    document.body.classList.toggle("nav-open", expanded);
+  }
 
   function closeMenu() {
-    if (!navMenu || !navToggle) return;
-    navMenu.classList.remove("active");
-    navToggle.classList.remove("open");
-    navToggle.setAttribute("aria-expanded", "false");
-    document.body.classList.remove("nav-open");
+    setMenuState(false);
   }
 
   if (navToggle && navMenu) {
+    setMenuState(navToggle.getAttribute("aria-expanded") === "true");
+
     navToggle.addEventListener("click", (event) => {
       event.stopPropagation();
-      const isOpen = navMenu.classList.toggle("active");
-      navToggle.classList.toggle("open", isOpen);
-      navToggle.setAttribute("aria-expanded", String(isOpen));
-      document.body.classList.toggle("nav-open", isOpen);
+      setMenuState(navToggle.getAttribute("aria-expanded") !== "true");
     });
 
     document.addEventListener("click", (event) => {
@@ -31,6 +42,14 @@ document.addEventListener("DOMContentLoaded", () => {
       if (navMenu.contains(event.target) || navToggle.contains(event.target)) return;
       closeMenu();
     });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape" || navToggle.getAttribute("aria-expanded") !== "true") return;
+      closeMenu();
+      navToggle.focus();
+    });
+
+    onMediaChange(compactNavQuery, closeMenu);
   }
 
   navLinks.forEach((link) => {
@@ -47,12 +66,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
       event.preventDefault();
 
+      if (navMenu && navMenu.contains(anchor)) {
+        if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
+        target.focus({ preventScroll: true });
+      }
+
       const headerOffset = header ? header.offsetHeight : 56;
       const y = target.getBoundingClientRect().top + window.scrollY - headerOffset - 12;
 
       window.scrollTo({
         top: y,
-        behavior: prefersReducedMotion ? "auto" : "smooth",
+        behavior: reduceMotionQuery.matches ? "auto" : "smooth",
       });
     });
   });
@@ -98,32 +122,54 @@ document.addEventListener("DOMContentLoaded", () => {
     document.documentElement.style.setProperty("--scroll-progress", progress.toFixed(4));
   }
 
+  let progressFrame = 0;
+  function scheduleProgressUpdate() {
+    if (progressFrame) return;
+    progressFrame = window.requestAnimationFrame(() => {
+      progressFrame = 0;
+      updateProgress();
+    });
+  }
+
   updateProgress();
-  window.addEventListener("scroll", updateProgress, { passive: true });
-  window.addEventListener("resize", updateProgress);
+  window.addEventListener("scroll", scheduleProgressUpdate, { passive: true });
+  window.addEventListener("resize", scheduleProgressUpdate);
 
   const typewriter = document.querySelector(".typewriter");
-  if (typewriter && !prefersReducedMotion) {
+  if (typewriter && !reduceMotionQuery.matches) {
     const fullText = typewriter.textContent.replace(/\s+/g, " ").trim();
+    typewriter.style.minHeight = `${Math.ceil(typewriter.getBoundingClientRect().height)}px`;
     typewriter.textContent = "";
     typewriter.classList.add("ready");
     let index = 0;
+    let typewriterTimer = 0;
+
+    function showFullText() {
+      window.clearTimeout(typewriterTimer);
+      typewriter.textContent = fullText;
+      typewriter.classList.remove("ready");
+    }
 
     function typeNextCharacter() {
+      if (reduceMotionQuery.matches) {
+        showFullText();
+        return;
+      }
       typewriter.textContent = fullText.slice(0, index);
       index += 1;
       if (index <= fullText.length) {
-        window.setTimeout(typeNextCharacter, 26);
+        typewriterTimer = window.setTimeout(typeNextCharacter, 26);
       }
     }
 
+    onMediaChange(reduceMotionQuery, (event) => {
+      if (event.matches) showFullText();
+    });
     typeNextCharacter();
   }
 
-  document.querySelectorAll("#skills li").forEach((chip, index) => {
-    chip.style.setProperty("--float-delay", `${(index % 6) * -420}ms`);
-    chip.tabIndex = chip.querySelector("a") ? -1 : 0;
-  });
+
+
 
   if ("IntersectionObserver" in window) {
     const revealTargets = document.querySelectorAll("main section:not(.hero)");
@@ -153,13 +199,17 @@ document.addEventListener("DOMContentLoaded", () => {
           const finalValue = Number(stat.dataset.countTo || "0");
           const suffix = stat.dataset.suffix || "";
 
-          if (prefersReducedMotion) {
+          if (reduceMotionQuery.matches) {
             stat.textContent = `${finalValue}${suffix}`;
           } else {
             const start = performance.now();
             const duration = 900;
 
             function tick(now) {
+              if (reduceMotionQuery.matches) {
+                stat.textContent = `${finalValue}${suffix}`;
+                return;
+              }
               const progress = Math.min((now - start) / duration, 1);
               const eased = 1 - Math.pow(1 - progress, 3);
               stat.textContent = `${Math.round(finalValue * eased)}${suffix}`;
@@ -205,46 +255,13 @@ document.addEventListener("DOMContentLoaded", () => {
     jobs.forEach((job) => jobObserver.observe(job));
   }
 
-  if (canHover && !prefersReducedMotion) {
-    document.querySelectorAll(".tilt-card").forEach((card) => {
-      card.addEventListener("mousemove", (event) => {
-        const rect = card.getBoundingClientRect();
-        const x = (event.clientX - rect.left) / rect.width - 0.5;
-        const y = (event.clientY - rect.top) / rect.height - 0.5;
-        card.style.setProperty("--tilt-x", `${x * 5}deg`);
-        card.style.setProperty("--tilt-y", `${y * -5}deg`);
-      });
-
-      card.addEventListener("mouseleave", () => {
-        card.style.setProperty("--tilt-x", "0deg");
-        card.style.setProperty("--tilt-y", "0deg");
-      });
-    });
-
-    document.querySelectorAll(".btn").forEach((button) => {
-      button.addEventListener("mousemove", (event) => {
-        const rect = button.getBoundingClientRect();
-        const x = event.clientX - (rect.left + rect.width / 2);
-        const y = event.clientY - (rect.top + rect.height / 2);
-        const distance = Math.hypot(x, y);
-        if (distance > 40) return;
-        button.style.setProperty("--mx", `${x * 0.12}px`);
-        button.style.setProperty("--my", `${y * 0.18}px`);
-      });
-
-      button.addEventListener("mouseleave", () => {
-        button.style.setProperty("--mx", "0px");
-        button.style.setProperty("--my", "0px");
-      });
-    });
-  }
-
   const canvas = document.querySelector(".hero-circuit");
-  if (canvas && !prefersReducedMotion) {
+  if (canvas) {
     const context = canvas.getContext("2d");
     let width = 0;
     let height = 0;
     let frameId = 0;
+    let heroVisible = !("IntersectionObserver" in window);
     const particles = Array.from({ length: 44 }, (_, index) => ({
       x: (index * 97) % 100,
       y: (index * 53) % 100,
@@ -262,7 +279,28 @@ document.addEventListener("DOMContentLoaded", () => {
       context.setTransform(ratio, 0, 0, ratio, 0, 0);
     }
 
+    function canAnimateCanvas() {
+      return !reduceMotionQuery.matches && !document.hidden && heroVisible && width > 0 && height > 0;
+    }
+
+    function stopCanvas() {
+      if (!frameId) return;
+      cancelAnimationFrame(frameId);
+      frameId = 0;
+    }
+
+    function syncCanvasAnimation() {
+      if (canAnimateCanvas()) {
+        if (!frameId) frameId = requestAnimationFrame(draw);
+      } else {
+        stopCanvas();
+      }
+    }
+
     function draw() {
+      frameId = 0;
+      if (!canAnimateCanvas()) return;
+
       context.clearRect(0, 0, width, height);
       context.strokeStyle = "rgba(56,189,248,0.24)";
       context.fillStyle = "rgba(125,211,252,0.52)";
@@ -284,9 +322,11 @@ document.addEventListener("DOMContentLoaded", () => {
           const other = particles[i];
           const ox = (other.x / 100) * width;
           const oy = (other.y / 100) * height;
-          const distance = Math.hypot(px - ox, py - oy);
-          if (distance > 145) continue;
-          context.globalAlpha = 1 - distance / 145;
+          const dx = px - ox;
+          const dy = py - oy;
+          const distanceSquared = dx * dx + dy * dy;
+          if (distanceSquared > 145 * 145) continue;
+          context.globalAlpha = 1 - Math.sqrt(distanceSquared) / 145;
           context.beginPath();
           context.moveTo(px, py);
           context.lineTo(ox, oy);
@@ -299,18 +339,24 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     resizeCanvas();
-    draw();
+    syncCanvasAnimation();
     window.addEventListener("resize", resizeCanvas);
-    reduceMotionQuery.addEventListener("change", (event) => {
-      if (event.matches) cancelAnimationFrame(frameId);
-    });
+    document.addEventListener("visibilitychange", syncCanvasAnimation);
+    onMediaChange(reduceMotionQuery, syncCanvasAnimation);
+    if ("IntersectionObserver" in window) {
+      const heroObserver = new IntersectionObserver(([entry]) => {
+        heroVisible = entry.isIntersecting;
+        syncCanvasAnimation();
+      });
+      heroObserver.observe(canvas.closest(".hero") || canvas);
+    }
   }
 
   const backToTop = document.querySelector(".back-to-top");
   if (backToTop) {
     backToTop.addEventListener("click", (event) => {
       event.preventDefault();
-      window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
+      window.scrollTo({ top: 0, behavior: reduceMotionQuery.matches ? "auto" : "smooth" });
     });
   }
 
@@ -329,6 +375,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!input || !errorNode) return isValid;
     input.classList.toggle("valid", isValid);
     input.classList.toggle("invalid", !isValid);
+    input.setAttribute("aria-invalid", String(!isValid));
     errorNode.textContent = isValid ? "" : message;
     return isValid;
   }
@@ -383,11 +430,19 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener("submit", (event) => {
       event.preventDefault();
 
-      const isValid =
-        validateName() && validateEmail() && validateSubject() && validateMessage();
+      const isValid = [
+        validateName(),
+        validateEmail(),
+        validateSubject(),
+        validateMessage(),
+      ].every(Boolean);
 
       if (!isValid) {
         alert("Please correct the highlighted fields before continuing.");
+        const firstInvalid = [nameInput, emailInput, subjectInput, messageInput].find(
+          (input) => input && input.getAttribute("aria-invalid") === "true"
+        );
+        if (firstInvalid) firstInvalid.focus();
         return;
       }
 
@@ -408,7 +463,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     form.addEventListener("reset", () => {
       [nameInput, emailInput, subjectInput, messageInput].forEach((input) => {
-        if (input) input.classList.remove("valid", "invalid");
+        if (input) {
+          input.classList.remove("valid", "invalid");
+          input.setAttribute("aria-invalid", "false");
+        }
       });
 
       [nameError, emailError, subjectError, messageError].forEach((errorNode) => {
