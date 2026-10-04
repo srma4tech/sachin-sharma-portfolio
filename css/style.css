@@ -1432,6 +1432,7 @@ h3 {
 
 .hero {
   min-height: calc(88svh - var(--header-h));
+  padding-block: clamp(36px, 6vh, 52px);
   padding-inline: var(--page-gutter);
   background: radial-gradient(ellipse at 88% 45%, rgba(116, 199, 184, 0.055), transparent 36rem);
 }
@@ -1451,11 +1452,11 @@ h3 {
 }
 
 .hero h1 {
-  max-width: 16ch;
-  font-size: clamp(2.55rem, 5.8vw, 5rem);
+  max-width: 20ch;
+  font-size: clamp(2.55rem, 4.4vw, 3.9rem);
   font-weight: 550;
   letter-spacing: -0.06em;
-  line-height: 0.99;
+  line-height: 1.04;
 }
 
 .eyebrow,
