@@ -1088,6 +1088,41 @@ footer {
   background: rgba(255, 255, 255, 0.015);
 }
 
+.quick-view-location {
+  margin: calc(-1 * var(--space-4)) 0 var(--space-4);
+  color: var(--text-secondary);
+}
+
+.quick-view-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.quick-view {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--text-secondary);
+}
+
+.quick-view tr {
+  border-bottom: 1px solid var(--border-hairline);
+}
+
+.quick-view th,
+.quick-view td {
+  padding: 12px 16px 12px 0;
+  text-align: left;
+  vertical-align: top;
+}
+
+.quick-view th {
+  width: 190px;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 0.84rem;
+  font-weight: 500;
+}
+
 .recruiter-grid,
 .build-grid,
 .capability-grid {
@@ -1135,6 +1170,29 @@ footer {
 
 .featured-grid .project {
   padding: clamp(20px, 3vw, 32px);
+}
+
+.other-builds-heading {
+  margin: var(--space-6) 0 var(--space-3);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.other-builds {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.other-builds .project {
+  padding: var(--space-4);
+  background: var(--bg-surface);
+}
+
+.case-study-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .engineering-progression {
@@ -1231,7 +1289,9 @@ footer {
   .recruiter-grid,
   .build-grid,
   .capability-grid,
-  .featured-grid {
+  .featured-grid,
+  .other-builds,
+  .case-study-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1241,6 +1301,23 @@ footer {
 
   .principles {
     grid-template-columns: 1fr;
+  }
+
+  .quick-view,
+  .quick-view tbody,
+  .quick-view tr,
+  .quick-view th,
+  .quick-view td {
+    display: block;
+    width: 100%;
+  }
+
+  .quick-view th {
+    padding: 12px 0 0;
+  }
+
+  .quick-view td {
+    padding: 2px 0 12px;
   }
 }
 
