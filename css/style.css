@@ -927,6 +927,10 @@ footer {
     right: 0;
     top: var(--header-h);
     padding: var(--space-4);
+    max-height: calc(100vh - var(--header-h));
+    max-height: calc(100dvh - var(--header-h));
+    overflow-y: auto;
+    overscroll-behavior: contain;
     border-bottom: 1px solid var(--border-hairline);
     background: rgba(10,14,20,0.96);
     transform: translateY(-130%);
@@ -1692,4 +1696,18 @@ textarea:focus {
     opacity: 1;
     transform: none;
   }
+}
+
+
+.form-error-summary {
+  margin: 0 0 var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid #f87171;
+  border-radius: var(--radius-card);
+  color: #fecaca;
+  background: rgba(248, 113, 113, 0.08);
+}
+
+.form-error-summary[hidden] {
+  display: none;
 }
