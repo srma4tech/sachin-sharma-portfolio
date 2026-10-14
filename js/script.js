@@ -437,8 +437,9 @@ document.addEventListener("DOMContentLoaded", () => {
         validateMessage(),
       ].every(Boolean);
 
+      const errorSummary = document.getElementById("form-error-summary");
       if (!isValid) {
-        alert("Please correct the highlighted fields before continuing.");
+        if (errorSummary) errorSummary.hidden = false;
         const firstInvalid = [nameInput, emailInput, subjectInput, messageInput].find(
           (input) => input && input.getAttribute("aria-invalid") === "true"
         );
@@ -446,6 +447,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
+      if (errorSummary) errorSummary.hidden = true;
       const name = encodeURIComponent(nameInput.value.trim());
       const email = encodeURIComponent(emailInput.value.trim());
       const subject = encodeURIComponent(subjectInput.value.trim());
@@ -462,6 +464,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     form.addEventListener("reset", () => {
+      const errorSummary = document.getElementById("form-error-summary");
+      if (errorSummary) errorSummary.hidden = true;
       [nameInput, emailInput, subjectInput, messageInput].forEach((input) => {
         if (input) {
           input.classList.remove("valid", "invalid");
