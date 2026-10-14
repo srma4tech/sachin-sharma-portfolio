@@ -26,8 +26,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.onload=null;this.media='all'" />
     <noscript><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" /></noscript>
-    <link rel="preload" href="css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link rel="stylesheet" href="css/style.css" /></noscript>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/architects-blueprint.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" media="print" onload="this.onload=null;this.media='all'" />
     <noscript>    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" /></noscript>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DTDNTZSRTH"></script>
@@ -70,7 +70,7 @@
         <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-nav"><span></span><span></span><span></span></button>
         <nav id="primary-nav" class="nav-menu" aria-label="Primary">
           <ul>
-            <li><a href="#engineering-signal">Approach</a></li><li><a href="#what-i-build">What I Build</a></li><li><a href="#featured-engineering">Work</a></li><li><a href="#capability">Capability</a></li><li><a href="#experience">Journey</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li><li class="resume-link"><a href="documents/Sachin-Sharma-Resume.pdf" download>Resume</a></li>
+            <li><a href="#engineering-signal">Approach</a></li><li><a href="#what-i-build">What I Build</a></li><li><a href="#featured-engineering">Work</a></li><li><a href="#architecture">Architecture</a></li><li><a href="#capability">Capability</a></li><li><a href="#experience">Journey</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li><li class="resume-link"><a href="documents/Sachin-Sharma-Resume.pdf" download>Resume</a></li>
           </ul><span class="nav-indicator" aria-hidden="true"></span>
         </nav>
       </div><span class="scroll-progress" aria-hidden="true"></span>
@@ -124,11 +124,64 @@
         <article class="project"><h3><a href="https://srma4tech.github.io/digital-mantra-japa/" target="_blank" rel="noopener noreferrer">Digital Mantra Japa</a></h3><p class="project-duration">Spiritual PWA</p><p>A mobile-first spiritual PWA with mantra content, japa tracking, progress, audio experiences, Firebase integration and accessibility features.</p><ul class="tag-list"><li>PWA</li><li>Firebase</li></ul></article>
       </div></section>
 
-      <section id="engineering-case-studies"><p class="eyebrow">Selected work</p><h2>Selected Work</h2><div class="project-grid case-study-grid">
-        <article class="project case-study"><h3><a href="https://www.eaton.com/" target="_blank" rel="noopener noreferrer">Eaton.com · AEMaaCS migration</a></h3><p><strong>Context</strong> AEM as a Cloud Service migration.</p><p><strong>What I worked on</strong> Editable templates, MSM rollout, AEM Forms and third-party service integration.</p></article>
-        <article class="project case-study"><h3><a href="https://www.publicissapient.com/" target="_blank" rel="noopener noreferrer">Publicis Sapient · Headless AEM and forms</a></h3><p><strong>Context</strong> Headless AEM and advanced forms flows.</p><p><strong>What I worked on</strong> Submission handlers, prefill services, workflows, schedulers and integrations.</p></article>
-        <article class="project case-study"><h3><a href="https://www.axalta.com/" target="_blank" rel="noopener noreferrer">Axalta · AEM 6.3 to 6.5 migration support</a></h3><p><strong>Context</strong> AEM 6.3 to 6.5 migration support.</p><p><strong>What I worked on</strong> Components, editable templates, experience fragments and external API integrations.</p></article>
-        <article class="project case-study"><h3><a href="https://www.gsk.com/" target="_blank" rel="noopener noreferrer">GSK · Java production support</a></h3><p><strong>Context</strong> Java-based systems in production.</p><p><strong>What I worked on</strong> Regression validation, defect analysis and production support.</p></article>
+      <section id="architecture" class="architecture-section">
+        <p class="eyebrow">Architecture, made clear</p><h2>Understand the system. Respect the boundaries.</h2>
+        <p class="section-intro">Technology-focused reference views for common AEM and Java engineering patterns. These are illustrative examples—not diagrams of any client environment.</p>
+        <div class="architecture-frame">
+          <div class="architecture-frame-header"><span class="diagram-label">01 / AEM DELIVERY ARCHITECTURE</span><span class="diagram-status"><span aria-hidden="true"></span> Conceptual flow</span></div>
+          <div class="architecture-diagram" role="img" aria-label="Typical AEM delivery flow: visitor browser to CDN edge cache, Dispatcher filtering and cache, then AEM Publish. The authoring and integration plane shows AEM Author, OSGi services, and external APIs. Security, observability, resilience and deployment governance cross-cut the system.">
+            <svg viewBox="0 0 960 450" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+              <defs><marker id="arch-arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#0f9488"/></marker><marker id="arch-arrow-muted" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#64748b"/></marker></defs>
+              <rect x="18" y="24" width="924" height="400" rx="18" fill="#f8fafc" stroke="#dbe4ee"/>
+              <text x="42" y="57" fill="#64748b" font-size="12" font-family="Inter, sans-serif" letter-spacing="1.5">DELIVERY PLANE</text>
+              <g font-family="Inter, sans-serif" text-anchor="middle">
+                <rect x="48" y="91" width="150" height="68" rx="10" fill="#fff" stroke="#cbd5e1" stroke-width="1.5"/><text x="123" y="119" font-size="15" font-weight="600" fill="#0f172a">Visitor</text><text x="123" y="140" font-size="11" fill="#64748b">Browser / device</text>
+                <rect x="258" y="91" width="150" height="68" rx="10" fill="#e0f2f1" stroke="#0f9488" stroke-width="1.5"/><text x="333" y="119" font-size="15" font-weight="600" fill="#115e59">CDN</text><text x="333" y="140" font-size="11" fill="#0f766e">Edge cache</text>
+                <rect x="468" y="91" width="150" height="68" rx="10" fill="#e0f2f1" stroke="#0f9488" stroke-width="1.5"/><text x="543" y="119" font-size="15" font-weight="600" fill="#115e59">Dispatcher</text><text x="543" y="140" font-size="11" fill="#0f766e">Filter · cache</text>
+                <rect x="678" y="91" width="210" height="68" rx="10" fill="#0b1220" stroke="#0b1220" stroke-width="1.5"/><text x="783" y="119" font-size="15" font-weight="600" fill="#f8fafc">AEM Publish</text><text x="783" y="140" font-size="11" fill="#cbd5e1">Render / deliver</text>
+                <path d="M198 125 H252 M408 125 H462 M618 125 H672" fill="none" stroke="#0f9488" stroke-width="2" marker-end="url(#arch-arrow)"/>
+                <text x="42" y="213" fill="#64748b" font-size="12" text-anchor="start" letter-spacing="1.5">AUTHORING &amp; INTEGRATION PLANE</text>
+                <rect x="80" y="244" width="210" height="72" rx="10" fill="#fff" stroke="#94a3b8" stroke-width="1.5"/><text x="185" y="273" font-size="15" font-weight="600" fill="#0f172a">AEM Author</text><text x="185" y="295" font-size="11" fill="#64748b">Content · review · publish</text>
+                <rect x="375" y="244" width="210" height="72" rx="10" fill="#e0f2f1" stroke="#0f9488" stroke-width="1.5"/><text x="480" y="273" font-size="15" font-weight="600" fill="#115e59">OSGi services</text><text x="480" y="295" font-size="11" fill="#0f766e">Validate · orchestrate</text>
+                <rect x="670" y="244" width="210" height="72" rx="10" fill="#fff" stroke="#94a3b8" stroke-width="1.5"/><text x="775" y="273" font-size="15" font-weight="600" fill="#0f172a">External APIs</text><text x="775" y="295" font-size="11" fill="#64748b">Identity · search · services</text>
+                <path d="M290 280 H369 M585 280 H664" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#arch-arrow-muted)"/><path d="M480 244 V196 H783 V165" fill="none" stroke="#0f9488" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#arch-arrow)"/>
+                <rect x="80" y="352" width="800" height="42" rx="8" fill="#eef2ff" stroke="#c7d2fe"/><text x="480" y="378" font-size="12" fill="#3730a3">Cross-cutting: security · observability · resilience · deployment governance</text>
+              </g>
+            </svg>
+          </div>
+          <div class="architecture-legend"><span><i class="legend-dot legend-delivery"></i> Delivery / cache boundary</span><span><i class="legend-dot legend-service"></i> Service boundary</span><span><i class="legend-dot legend-integration"></i> Integration / control flow</span></div>
+        </div>
+        <div class="architecture-frame architecture-frame-secondary">
+          <div class="architecture-frame-header"><span class="diagram-label">02 / JAVA INTEGRATION FLOW</span><span class="diagram-status"><span aria-hidden="true"></span> Resilience pattern</span></div>
+          <div class="architecture-diagram" role="img" aria-label="A request enters an AEM servlet, is validated and delegated to an OSGi service, which calls an external API with a timeout. A normalized response or controlled error is returned, while logs and metrics support observability.">
+            <svg viewBox="0 0 960 260" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+              <defs><marker id="int-arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#0f9488"/></marker></defs>
+              <rect x="12" y="12" width="936" height="236" rx="16" fill="#f8fafc" stroke="#dbe4ee"/>
+              <g font-family="Inter, sans-serif" text-anchor="middle">
+                <rect x="35" y="62" width="160" height="64" rx="9" fill="#fff" stroke="#cbd5e1" stroke-width="1.5"/><text x="115" y="88" font-size="14" font-weight="600" fill="#0f172a">HTTP request</text><text x="115" y="108" font-size="11" fill="#64748b">Auth · input</text>
+                <rect x="230" y="62" width="160" height="64" rx="9" fill="#e0f2f1" stroke="#0f9488" stroke-width="1.5"/><text x="310" y="88" font-size="14" font-weight="600" fill="#115e59">Sling Servlet</text><text x="310" y="108" font-size="11" fill="#0f766e">Validate · map</text>
+                <rect x="425" y="62" width="160" height="64" rx="9" fill="#e0f2f1" stroke="#0f9488" stroke-width="1.5"/><text x="505" y="88" font-size="14" font-weight="600" fill="#115e59">OSGi service</text><text x="505" y="108" font-size="11" fill="#0f766e">Policy · timeout</text>
+                <rect x="620" y="62" width="160" height="64" rx="9" fill="#fff" stroke="#cbd5e1" stroke-width="1.5"/><text x="700" y="88" font-size="14" font-weight="600" fill="#0f172a">External API</text><text x="700" y="108" font-size="11" fill="#64748b">Remote dependency</text>
+                <rect x="815" y="62" width="105" height="64" rx="9" fill="#0b1220" stroke="#0b1220" stroke-width="1.5"/><text x="867" y="88" font-size="13" font-weight="600" fill="#f8fafc">Result</text><text x="867" y="108" font-size="10" fill="#cbd5e1">DTO / error</text>
+                <path d="M195 94 H224 M390 94 H419 M585 94 H614 M780 94 H809" stroke="#0f9488" stroke-width="2" fill="none" marker-end="url(#int-arrow)"/>
+                <path d="M700 126 V159 H505 V132" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 4" fill="none"/>
+                <rect x="230" y="174" width="550" height="42" rx="8" fill="#eef2ff" stroke="#c7d2fe"/><text x="505" y="200" font-size="12" fill="#3730a3">Observability: correlation ID · structured logs · latency · failure classification</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+        <div class="architecture-notes">
+          <article><span class="architecture-index">01</span><h3>Cache intentionally</h3><p>Define cacheability, invalidation, and Dispatcher filters explicitly; avoid treating cache as a single switch.</p></article>
+          <article><span class="architecture-index">02</span><h3>Keep integrations bounded</h3><p>Put validation, timeouts, error mapping, and service credentials behind clear backend service boundaries.</p></article>
+          <article><span class="architecture-index">03</span><h3>Design for operations</h3><p>Plan observability, safe failure behavior, access control, and release verification alongside implementation.</p></article>
+        </div>
+      </section>
+
+      <section id="engineering-case-studies"><p class="eyebrow">Engineering case studies</p><h2>How I approach complex systems</h2><p class="section-intro">Technology-led summaries of engineering problems and contribution areas, without reproducing client-specific architecture or internal implementation details.</p><div class="project-grid case-study-grid">
+        <article class="project case-study"><p class="case-study-kicker">01 / CLOUD MODERNIZATION</p><h3>AEM as a Cloud Service modernization</h3><p><strong>Engineering focus</strong> Cloud-readiness, reusable authoring patterns, content structure, Dispatcher strategy and release considerations.</p><p><strong>Contribution lens</strong> Working with the wider engineering team on defined technical areas and implementation trade-offs.</p><ul class="tag-list"><li>AEMaaCS</li><li>Dispatcher</li><li>MSM</li></ul></article>
+        <article class="project case-study"><p class="case-study-kicker">02 / BACKEND INTEGRATION</p><h3>Reliable forms and service integrations</h3><p><strong>Engineering focus</strong> Submission handling, prefill flows, input validation, OSGi service boundaries and failure-aware API interactions.</p><p><strong>Contribution lens</strong> Backend implementation and integration behavior, with attention to maintainability and operational support.</p><ul class="tag-list"><li>Java</li><li>AEM Forms</li><li>REST APIs</li></ul></article>
+        <article class="project case-study"><p class="case-study-kicker">03 / PLATFORM EVOLUTION</p><h3>Reusable components and template governance</h3><p><strong>Engineering focus</strong> Component boundaries, editable templates, experience fragments and repeatable patterns for multi-site delivery.</p><p><strong>Contribution lens</strong> Supporting consistency through reusable implementation patterns and practical governance.</p><ul class="tag-list"><li>AEM Sites</li><li>Templates</li><li>MSM</li></ul></article>
+        <article class="project case-study"><p class="case-study-kicker">04 / PRODUCTION ENGINEERING</p><h3>Java reliability and issue resolution</h3><p><strong>Engineering focus</strong> Defect analysis, regression validation, troubleshooting and safe changes to production-facing systems.</p><p><strong>Contribution lens</strong> Evidence-led investigation, clear root-cause reasoning and maintainable corrective changes.</p><ul class="tag-list"><li>Java</li><li>RCA</li><li>Testing</li></ul></article>
       </div></section>
 
       <section id="capability"><p class="eyebrow">Engineering capability</p><h2>Technical range</h2><div class="capability-grid">
@@ -139,7 +192,7 @@
         <article><h3>Architecture</h3><p>Content models · MSM strategy · Reusable templates · Dispatcher and caching strategy</p></article>
       </div></section>
       <section id="experience"><p class="eyebrow">Engineering journey</p><h2>Engineering journey</h2><div class="timeline">
-        <article class="job"><h3>LTIMindtree — 2026–Present</h3><p class="meta">Specialist - Software Engineering (Senior AEM Backend Engineer)</p><p>Leading the end-to-end migration from legacy AEM to AEM as a Cloud Service, including content model re-platforming, dispatcher strategy and cutover. Building and maintaining AEM Forms workflows and third-party integrations for an ecommerce platform.</p><p class="meta">Stack: AEMaaCS · Dispatcher · AEM Forms · Enterprise integrations</p></article>
+        <article class="job"><h3>LTIMindtree — 2026–Present</h3><p class="meta">Specialist - Software Engineering (Senior AEM Backend Engineer)</p><p>Working closely with the engineering team on an AEM as a Cloud Service modernization, contributing to defined technical areas across reusable authoring patterns, Dispatcher strategy, AEM Forms and backend integrations.</p><p class="meta">Stack: AEMaaCS · Dispatcher · AEM Forms · Enterprise integrations</p></article>
         <article class="job"><h3>Publicis Sapient — 2023–2026</h3><p class="meta">Associate Technology L2</p><p>Delivered AEM Sites, DAM and Forms features for enterprise-scale programs, along with Headless AEM and advanced forms flows.</p><p class="meta">Stack: AEM Sites · DAM · Forms · Headless AEM · OSGi · AWS</p></article>
         <article class="job"><h3>TCS — 2018–2023</h3><p class="meta">System Engineer</p><p>Started in Java-based production support and regression testing, then transitioned into AEM development from 2020.</p><p class="meta">Stack: Java · AEM 6.x · Sling · OSGi</p></article>
       </div></section>
@@ -154,7 +207,7 @@
         <article class="achievement"><h3>Microsoft Azure Fundamentals</h3><p class="meta">AZ-900 · September 2021 - Present</p></article>
       </div><p><a href="https://www.credly.com/users/sachin-sharma-aem/badges/credly" target="_blank" rel="noopener noreferrer">View badges on Credly</a></p></section>
 
-      <section id="about"><p class="eyebrow">About</p><h2>About Sachin</h2><p>I'm a software engineer focused on Adobe Experience Manager and Java backend systems. I started in Java production support at TCS, moved into AEM development in 2020, and have since worked on Sites, DAM, Forms, Headless AEM, cloud migration and enterprise integrations.</p><p>Alongside enterprise work, I build developer tools, the AEM Technical Lead Playbook and AI-assisted technical learning workflows. My current work includes leading an AEM as a Cloud Service migration.</p></section>
+      <section id="about"><p class="eyebrow">About</p><h2>About Sachin</h2><p>I'm a software engineer focused on Adobe Experience Manager and Java backend systems. I started in Java production support at TCS, moved into AEM development in 2020, and have since worked on Sites, DAM, Forms, Headless AEM, cloud migration and enterprise integrations.</p><p>Alongside enterprise work, I build developer tools, the AEM Technical Lead Playbook and AI-assisted technical learning workflows. My current work includes contributing to an AEM as a Cloud Service modernization alongside the wider engineering team.</p></section>
 
       <section id="for-hiring-teams"><p class="eyebrow">For hiring teams</p><h2>Looking for an engineer who can go beyond implementation?</h2><p>I work at the intersection of enterprise AEM, Java backend engineering, cloud modernization and technical problem solving.</p></section>
 
