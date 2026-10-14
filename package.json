@@ -1,0 +1,12 @@
+{
+  "name": "sachin-sharma-portfolio",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "check:js": "node --check js/script.js",
+    "test:e2e": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.0"
+  }
+}
