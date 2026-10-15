@@ -46,7 +46,7 @@ test("reduced-motion preference preserves the complete hero headline", async ({ 
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
   await expect(page.locator(".typewriter")).toContainText(
-    "Building enterprise systems. Engineering better ways to build them."
+    "Senior AEM & AEMaaCS Engineer"
   );
 });
 
