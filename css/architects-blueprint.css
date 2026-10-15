@@ -283,3 +283,43 @@ main section{scroll-margin-top:calc(var(--header-h) + 14px)}.hero{position:relat
   outline: 3px solid #087f83;
   outline-offset: 3px;
 }
+
+
+/* Definitive light-surface button override: style.css declares button text with !important. */
+.recruiter-section a.btn-secondary,
+.recruiter-section a.btn-ghost,
+#engineering-signal a.btn-secondary, #engineering-signal a.btn-ghost,
+#what-i-build a.btn-secondary, #what-i-build a.btn-ghost,
+#architecture a.btn-secondary, #architecture a.btn-ghost,
+#engineering-case-studies a.btn-secondary, #engineering-case-studies a.btn-ghost,
+#capability a.btn-secondary, #capability a.btn-ghost,
+#open-source a.btn-secondary, #open-source a.btn-ghost,
+#achievements a.btn-secondary, #achievements a.btn-ghost,
+#about a.btn-secondary, #about a.btn-ghost,
+#for-hiring-teams a.btn-secondary, #for-hiring-teams a.btn-ghost,
+#writing a.btn-secondary, #writing a.btn-ghost,
+#contact .contact-form button.btn-secondary {
+  color: #063247 !important;
+  background-color: #e1f8f6 !important;
+  border: 1px solid #087f83 !important;
+  text-decoration: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+.recruiter-section a.btn-secondary:hover,
+.recruiter-section a.btn-ghost:hover,
+#engineering-signal a.btn-secondary:hover, #engineering-signal a.btn-ghost:hover,
+#what-i-build a.btn-secondary:hover, #what-i-build a.btn-ghost:hover,
+#architecture a.btn-secondary:hover, #architecture a.btn-ghost:hover,
+#engineering-case-studies a.btn-secondary:hover, #engineering-case-studies a.btn-ghost:hover,
+#capability a.btn-secondary:hover, #capability a.btn-ghost:hover,
+#open-source a.btn-secondary:hover, #open-source a.btn-ghost:hover,
+#achievements a.btn-secondary:hover, #achievements a.btn-ghost:hover,
+#about a.btn-secondary:hover, #about a.btn-ghost:hover,
+#for-hiring-teams a.btn-secondary:hover, #for-hiring-teams a.btn-ghost:hover,
+#writing a.btn-secondary:hover, #writing a.btn-ghost:hover,
+#contact .contact-form button.btn-secondary:hover {
+  color: #ffffff !important;
+  background-color: #075e63 !important;
+  border-color: #075e63 !important;
+}
