@@ -45,8 +45,8 @@ test("reset clears the form error summary and field error state", async ({ page 
 test("reduced-motion preference preserves the complete hero headline", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
-  await expect(page.locator(".typewriter")).toContainText(
-    "Building enterprise systems. Engineering better ways to build them."
+  await expect(page.locator("h1")).toContainText(
+    "Senior AEM & AEMaaCS Engineer"
   );
 });
 
