@@ -62,3 +62,172 @@ main section{scroll-margin-top:calc(var(--header-h) + 14px)}.hero{position:relat
   .avatar-stage { width: min(78%, 300px); }
   .profile-img { object-position: center 10%; }
 }
+
+
+/* Portfolio consistency pass: stable contrast, persistent actions, and visual case studies */
+:root {
+  --teal-soft: #baf8f3;
+  --card-navy: #0b2035;
+  --card-navy-2: #102c43;
+}
+#engineering-signal, #what-i-build, #architecture, #capability,
+#open-source, #achievements, #about, #for-hiring-teams, #writing,
+#engineering-case-studies {
+  background: var(--paper);
+  color: var(--ink);
+}
+#engineering-signal h2, #what-i-build h2, #architecture h2,
+#capability h2, #open-source h2, #achievements h2, #about h2,
+#for-hiring-teams h2, #writing h2, #engineering-case-studies h2 {
+  color: var(--ink);
+}
+#engineering-signal .section-intro, #what-i-build .section-intro,
+#architecture .section-intro, #capability .section-intro,
+#open-source .section-intro, #achievements .section-intro,
+#about .section-intro, #for-hiring-teams .section-intro,
+#writing .section-intro, #engineering-case-studies .section-intro {
+  color: var(--muted);
+}
+.eyebrow { color: var(--teal-dark); }
+#what-i-build .highlight-item {
+  position: relative;
+  padding: 24px 22px 22px;
+  border: 1px solid #c8dce8;
+  border-top: 3px solid var(--teal-dark);
+  background: linear-gradient(145deg, #fff, #f1f7fb);
+  box-shadow: 0 8px 22px rgba(7, 20, 38, .055);
+  color: var(--ink);
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+#what-i-build .highlight-item::before {
+  content: "↗";
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 18px;
+  border: 1px solid rgba(8,127,131,.35);
+  border-radius: 12px;
+  background: #e1f8f6;
+  color: #075e63;
+  font-size: 1.35rem;
+  font-weight: 800;
+  line-height: 1;
+}
+#what-i-build .highlight-item:nth-child(2)::before { content: "⌁"; }
+#what-i-build .highlight-item:nth-child(3)::before { content: "☁"; }
+#what-i-build .highlight-item:nth-child(4)::before { content: "✓"; }
+#what-i-build .highlight-item h3 { color: var(--ink); }
+#what-i-build .highlight-item p { color: #40566c; }
+#what-i-build .highlight-item:hover,
+#what-i-build .highlight-item:focus-within {
+  transform: translateY(-3px);
+  border-color: #63cfc8;
+  background: linear-gradient(145deg, #fff, #e9f9f8);
+  box-shadow: 0 14px 30px rgba(7, 32, 53, .12);
+}
+#what-i-build .highlight-item:hover h3,
+#what-i-build .highlight-item:hover p { color: var(--ink); }
+/* Buttons and links must remain identifiable before hover on every surface. */
+#engineering-signal a:not(.btn), #what-i-build a:not(.btn),
+#architecture a:not(.btn), #capability a:not(.btn),
+#open-source a:not(.btn), #achievements a:not(.btn),
+#about a:not(.btn), #for-hiring-teams a:not(.btn),
+#writing a:not(.btn), #engineering-case-studies a:not(.btn) {
+  color: #075e63;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+#engineering-signal .btn, #what-i-build .btn, #architecture .btn,
+#capability .btn, #open-source .btn, #achievements .btn,
+#about .btn, #for-hiring-teams .btn, #writing .btn,
+#engineering-case-studies .btn {
+  color: #063247;
+  background: #baf8f3;
+  border: 1px solid #087f83;
+  box-shadow: 0 2px 0 rgba(7, 20, 38, .08);
+}
+#engineering-signal .btn:hover, #what-i-build .btn:hover,
+#architecture .btn:hover, #capability .btn:hover,
+#open-source .btn:hover, #achievements .btn:hover,
+#about .btn:hover, #for-hiring-teams .btn:hover,
+#writing .btn:hover, #engineering-case-studies .btn:hover {
+  color: #fff;
+  background: #075e63;
+  border-color: #075e63;
+}
+/* Technical capability tiles echo the navy project cards, with accessible contrast. */
+#capability .capability-grid > * {
+  background: linear-gradient(145deg, #0d2a42, #081b2e);
+  border: 1px solid rgba(8,127,131,.35);
+  color: #eaf4fc;
+  box-shadow: 0 8px 22px rgba(7,20,38,.08);
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+#capability .capability-grid > * h3 { color: #f4f8fc; }
+#capability .capability-grid > * p { color: #c8d9e6; }
+#capability .capability-grid > *:hover,
+#capability .capability-grid > *:focus-within {
+  transform: translateY(-2px);
+  background: linear-gradient(145deg, #123951, #0b253b);
+  border-color: var(--teal);
+  box-shadow: 0 12px 26px rgba(7,20,38,.16);
+}
+#capability .capability-grid > *:hover h3,
+#capability .capability-grid > *:hover p { color: #fff; }
+/* Case studies: short, scannable narrative plus a simple visual flow. */
+#engineering-case-studies { padding: clamp(40px, 5vw, 64px) var(--gutter); }
+.case-study-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.case-study {
+  padding: 0 22px 22px;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid #d5e3ed;
+  box-shadow: 0 10px 28px rgba(7,20,38,.07);
+}
+.case-study h3 { color: var(--ink); font-size: 1.12rem; margin: 4px 0 10px; }
+.case-study p { color: #40566c; font-size: .9rem; line-height: 1.6; }
+.case-study p strong { color: #173d56; }
+.case-study:hover, .case-study:focus-within {
+  background: #fff;
+  border-color: #36bdb5;
+  box-shadow: 0 15px 34px rgba(7,20,38,.12);
+  transform: translateY(-2px);
+}
+.case-visual {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 104px;
+  margin: 0 -22px 18px;
+  padding: 18px 16px;
+  overflow: hidden;
+  background: radial-gradient(circle at 80% 15%, rgba(20,215,208,.18), transparent 32%), linear-gradient(135deg,#06192b,#10354d);
+  border-bottom: 1px solid rgba(20,215,208,.35);
+}
+.case-step {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 10px 7px;
+  border: 1px solid rgba(122,225,220,.48);
+  border-radius: 8px;
+  background: rgba(8,38,59,.8);
+  color: #f2fbff;
+  text-align: center;
+  font-size: .72rem;
+  line-height: 1.3;
+  font-weight: 650;
+}
+.case-arrow { color: #65eee5; font-size: 1.15rem; flex: 0 0 auto; }
+.case-study .case-tags { display:flex; flex-wrap:wrap; gap:6px; margin: 2px 0 16px; padding:0; list-style:none; }
+.case-study .case-tags li { border-radius:999px; padding:3px 9px; background:#e6f7f6; color:#075e63; border:1px solid #b7e8e4; font-size:.7rem; font-weight:650; }
+@media (max-width: 760px) {
+  .case-study-grid { grid-template-columns: 1fr; }
+  .case-visual { min-height: 92px; padding: 14px 10px; gap: 5px; }
+  .case-step { padding: 9px 4px; font-size: .65rem; }
+  #what-i-build .highlight-item { padding: 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #what-i-build .highlight-item, #capability .capability-grid > *, .case-study { transition: none; }
+}
