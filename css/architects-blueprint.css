@@ -231,3 +231,55 @@ main section{scroll-margin-top:calc(var(--header-h) + 14px)}.hero{position:relat
 @media (prefers-reduced-motion: reduce) {
   #what-i-build .highlight-item, #capability .capability-grid > *, .case-study { transition: none; }
 }
+
+
+/* Fix: secondary and ghost CTAs must remain visible on light backgrounds. */
+.recruiter-section .btn-secondary,
+.recruiter-section .btn-ghost,
+#engineering-signal .btn-secondary, #engineering-signal .btn-ghost,
+#what-i-build .btn-secondary, #what-i-build .btn-ghost,
+#architecture .btn-secondary, #architecture .btn-ghost,
+#engineering-case-studies .btn-secondary, #engineering-case-studies .btn-ghost,
+#capability .btn-secondary, #capability .btn-ghost,
+#open-source .btn-secondary, #open-source .btn-ghost,
+#achievements .btn-secondary, #achievements .btn-ghost,
+#about .btn-secondary, #about .btn-ghost,
+#for-hiring-teams .btn-secondary, #for-hiring-teams .btn-ghost,
+#writing .btn-secondary, #writing .btn-ghost {
+  color: #063247;
+  background: #e1f8f6;
+  border: 1px solid #087f83;
+  box-shadow: 0 2px 0 rgba(7, 20, 38, .08);
+  text-decoration: none;
+}
+.recruiter-section .btn-secondary:hover,
+.recruiter-section .btn-ghost:hover,
+#engineering-signal .btn-secondary:hover, #engineering-signal .btn-ghost:hover,
+#what-i-build .btn-secondary:hover, #what-i-build .btn-ghost:hover,
+#architecture .btn-secondary:hover, #architecture .btn-ghost:hover,
+#engineering-case-studies .btn-secondary:hover, #engineering-case-studies .btn-ghost:hover,
+#capability .btn-secondary:hover, #capability .btn-ghost:hover,
+#open-source .btn-secondary:hover, #open-source .btn-ghost:hover,
+#achievements .btn-secondary:hover, #achievements .btn-ghost:hover,
+#about .btn-secondary:hover, #about .btn-ghost:hover,
+#for-hiring-teams .btn-secondary:hover, #for-hiring-teams .btn-ghost:hover,
+#writing .btn-secondary:hover, #writing .btn-ghost:hover {
+  color: #fff;
+  background: #075e63;
+  border-color: #075e63;
+}
+.recruiter-section .btn-secondary:focus-visible,
+.recruiter-section .btn-ghost:focus-visible,
+#engineering-signal .btn-secondary:focus-visible, #engineering-signal .btn-ghost:focus-visible,
+#what-i-build .btn-secondary:focus-visible, #what-i-build .btn-ghost:focus-visible,
+#architecture .btn-secondary:focus-visible, #architecture .btn-ghost:focus-visible,
+#engineering-case-studies .btn-secondary:focus-visible, #engineering-case-studies .btn-ghost:focus-visible,
+#capability .btn-secondary:focus-visible, #capability .btn-ghost:focus-visible,
+#open-source .btn-secondary:focus-visible, #open-source .btn-ghost:focus-visible,
+#achievements .btn-secondary:focus-visible, #achievements .btn-ghost:focus-visible,
+#about .btn-secondary:focus-visible, #about .btn-ghost:focus-visible,
+#for-hiring-teams .btn-secondary:focus-visible, #for-hiring-teams .btn-ghost:focus-visible,
+#writing .btn-secondary:focus-visible, #writing .btn-ghost:focus-visible {
+  outline: 3px solid #087f83;
+  outline-offset: 3px;
+}
