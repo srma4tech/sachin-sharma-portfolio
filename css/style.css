@@ -1714,7 +1714,8 @@ textarea:focus {
 }
 
 
-/* Architect's Blueprint redesign — scoped overrides for consistent contrast and responsive rhythm */
+
+/* Portfolio UX consistency pass: one explicit palette and predictable interaction states */
 :root {
   color-scheme: dark;
   --bg-base: #071426;
@@ -1727,7 +1728,7 @@ textarea:focus {
   --text-tertiary: #a0b4c8;
   --accent: #2dd4bf;
   --accent-hover: #5eead4;
-  --header-bg: rgba(5, 18, 34, .94);
+  --header-bg: rgba(5, 18, 34, .96);
 }
 html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
 body { background: var(--bg-base); color: var(--text-primary); }
@@ -1736,8 +1737,9 @@ body { background: var(--bg-base); color: var(--text-primary); }
 .site-header .nav-menu a:hover, .site-header .nav-menu a:focus-visible, .site-header .nav-menu a.active { color: #5eead4; }
 .hero { background: radial-gradient(ellipse at 76% 45%, rgba(13,148,136,.17), transparent 36%), linear-gradient(135deg,#061426 0%,#081c31 55%,#061426 100%); }
 .hero h1, main h1, main h2, main h3 { color: #f4f8fc; }
+.hero-kicker { color: #5eead4; font-size: clamp(1.05rem, 2vw, 1.35rem); font-weight: 600; margin-top: .75rem; max-width: 38rem; }
 .hero .hero-subtitle, .section-intro, main p { color: var(--text-secondary); }
-.eyebrow, .hero .eyebrow { color: #5eead4; letter-spacing: .14em; }
+.eyebrow, .hero .eyebrow { color: #5eead4; letter-spacing: .12em; }
 .btn-primary { background: #2dd4bf; border-color: #2dd4bf; color: #062a30 !important; }
 .btn-primary:hover, .btn-primary:focus-visible { background: #99f6e4; border-color: #99f6e4; color: #042f2e !important; }
 .btn-secondary, .btn-ghost { color: #eaf4fc !important; border-color: #3d718b; }
@@ -1750,16 +1752,24 @@ main section:nth-of-type(even) .eyebrow { color: #087f78; }
 main section:nth-of-type(even) .project, main section:nth-of-type(even) .highlight-item { background: #ffffff; border-color: #d8e3ed; }
 main section:nth-of-type(even) a:not(.btn) { color: #075e67; }
 main section:nth-of-type(even) a:not(.btn):hover, main section:nth-of-type(even) a:not(.btn):focus-visible { color: #064e3b; }
-/* Hover states never switch to an incompatible background/text pair. */
 .project, .highlight-item, .capability-grid > *, .certification-grid > *, .timeline .job { transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
-.project:hover, .highlight-item:hover, .capability-grid > *:hover, .certification-grid > *:hover, .timeline .job:hover { background-color: #102840; color: #f4f8fc; border-color: #2dd4bf; box-shadow: 0 12px 30px rgba(0,0,0,.16); transform: translateY(-2px); }
-.project:hover h3, .project:hover p, .project:hover li, .highlight-item:hover h3, .highlight-item:hover p, .capability-grid > *:hover, .certification-grid > *:hover, .timeline .job:hover h3, .timeline .job:hover p { color: #f4f8fc; }
-main section:nth-of-type(even) .project:hover, main section:nth-of-type(even) .highlight-item:hover, main section:nth-of-type(even) .capability-grid > *:hover, main section:nth-of-type(even) .certification-grid > *:hover { background-color: #e7f7f6; color: #102033; box-shadow: 0 12px 28px rgba(7, 32, 53, .10); }
-main section:nth-of-type(even) .project:hover h3, main section:nth-of-type(even) .project:hover p, main section:nth-of-type(even) .project:hover li, main section:nth-of-type(even) .highlight-item:hover h3, main section:nth-of-type(even) .highlight-item:hover p { color: #102033; }
+.project:hover, .highlight-item:hover, .capability-grid > *:hover, .certification-grid > *:hover, .timeline .job:hover {
+  background-color: #102840; color: #f4f8fc; border-color: #2dd4bf;
+  box-shadow: 0 12px 30px rgba(0,0,0,.16); transform: translateY(-2px);
+}
+.project:hover h3, .project:hover h3 a, .project:hover p, .project:hover li,
+.highlight-item:hover h3, .highlight-item:hover p, .capability-grid > *:hover,
+.certification-grid > *:hover, .timeline .job:hover h3, .timeline .job:hover p { color: #f4f8fc; }
+main section:nth-of-type(even) .project:hover, main section:nth-of-type(even) .highlight-item:hover,
+main section:nth-of-type(even) .capability-grid > *:hover, main section:nth-of-type(even) .certification-grid > *:hover {
+  background-color: #e7f7f6; color: #102033; box-shadow: 0 12px 28px rgba(7,32,53,.10);
+}
+main section:nth-of-type(even) .project:hover h3, main section:nth-of-type(even) .project:hover h3 a,
+main section:nth-of-type(even) .project:hover p, main section:nth-of-type(even) .project:hover li,
+main section:nth-of-type(even) .highlight-item:hover h3, main section:nth-of-type(even) .highlight-item:hover p { color: #102033; }
 .blueprint-section { padding-block: clamp(3rem, 6vw, 5.5rem); }
 .build-section { scroll-margin-top: 6rem; }
 .profile-img { object-fit: cover; object-position: center 28%; border: 2px solid rgba(45,212,191,.7); box-shadow: 0 0 0 10px rgba(45,212,191,.07), 0 24px 70px rgba(0,0,0,.35); }
-.avatar-ring { border-color: rgba(45,212,191,.25); }
 .form-error-summary { color: #7f1d1d; background: #fff1f2; border-color: #b91c1c; }
 .error { color: #b91c1c; }
 input.invalid, textarea.invalid, select.invalid { border-color: #b91c1c; }
