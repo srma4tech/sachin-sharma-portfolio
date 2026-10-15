@@ -323,3 +323,43 @@ main section{scroll-margin-top:calc(var(--header-h) + 14px)}.hero{position:relat
   background-color: #075e63 !important;
   border-color: #075e63 !important;
 }
+
+
+/* Align Technical Range with the light cards in What I Build. */
+#capability {
+  background: var(--paper);
+  color: var(--ink);
+}
+#capability .capability-grid > article {
+  padding: 22px;
+  border: 1px solid #c8dce8;
+  border-top: 3px solid var(--teal-dark);
+  border-radius: 12px;
+  background: linear-gradient(145deg, #ffffff, #f1f7fb);
+  color: var(--ink);
+  box-shadow: 0 8px 22px rgba(7, 20, 38, .055);
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
+}
+#capability .capability-grid > article h3 {
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+#capability .capability-grid > article p {
+  color: #40566c;
+  line-height: 1.65;
+  margin-bottom: 0;
+}
+#capability .capability-grid > article:hover,
+#capability .capability-grid > article:focus-within {
+  transform: translateY(-3px);
+  border-color: #63cfc8;
+  background: linear-gradient(145deg, #ffffff, #e9f9f8);
+  box-shadow: 0 14px 30px rgba(7, 32, 53, .12);
+}
+#capability .capability-grid > article:hover h3,
+#capability .capability-grid > article:hover p {
+  color: var(--ink);
+}
+@media (prefers-reduced-motion: reduce) {
+  #capability .capability-grid > article { transition: none; }
+}
